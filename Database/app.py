@@ -6,6 +6,7 @@ Antony Wiegand, McMaster, 2026"""
 
 from fastapi import FastAPI, Request, Response, HTTPException
 from datetime import date
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import uuid
 
@@ -14,6 +15,14 @@ from . import relations
 from . import models
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # RUN python -m Database.app (from outside of Database folder)
 
@@ -25,7 +34,7 @@ def on_startup():
 @app.put("/bites/{id}")
 
 def put_bite(id: int, bite: models.CreateRating, request: Request, response: Response):
-    token=request.cookies.get("vistitor_token")
+    token=request.cookies.get("visitor_token")
 
     if not token:
         token = str(uuid.uuid4())
@@ -36,6 +45,10 @@ def put_bite(id: int, bite: models.CreateRating, request: Request, response: Res
 @app.get("/bites/{id}")
 def get_bites(id: int):
     return relations.select_bite(id)
+
+@app.get("/ranked-bites/{rank}")
+def get_ranked_bites(rank: int):
+    return relations.select_ranked_bites(rank)
 
 @app.delete("/ratings/")
 def delete_rating(date: date):

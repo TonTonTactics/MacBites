@@ -14,6 +14,8 @@ def vote(food_id: int, rating_value: int, token: str):
     """User votes Upvote or Downvote"""
     with Session(db.engine) as session:
 
+        bite = session.get(models.Bites, food_id)
+
         existing_vote = session.exec(
             select(models.Ratings).where(
                 models.Ratings.food_id == food_id,
@@ -22,30 +24,46 @@ def vote(food_id: int, rating_value: int, token: str):
         ).first()
 
         if existing_vote:
+            # ✅ calculate difference
+            diff = rating_value - existing_vote.rating
+
             existing_vote.rating = rating_value
             session.add(existing_vote)
+
+            # ✅ update bite score
+            if bite:
+                bite.rating = (bite.rating or 0) + diff
+                session.add(bite)
+
             session.commit()
             session.refresh(existing_vote)
 
             return {
                 "success": True,
                 "message": "Vote updated successfully",
-                "rating": existing_vote.rating
+                "rating": bite.rating if bite else existing_vote.rating
             }
         
+        # ✅ new vote
         new_vote = models.Ratings(
             food_id=food_id,
             token=token,
             rating=rating_value
         )
         session.add(new_vote)
+
+        # ✅ update bite score
+        if bite:
+            bite.rating = (bite.rating or 0) + rating_value
+            session.add(bite)
+
         session.commit()
         session.refresh(new_vote)
 
         return {
             "success": True,
             "message": "Vote created successfully",
-            "rating": new_vote.rating
+            "rating": bite.rating if bite else new_vote.rating
         }
 
 def select_bite(id: int):
@@ -54,6 +72,17 @@ def select_bite(id: int):
         results = session.exec(statement)
         bite = results.first()
         return bite
+
+def select_ranked_bites(rank: int):
+    with Session(db.engine) as session:
+        statement = (
+            select(models.Bites)
+            .order_by(models.Bites
+            .rating.desc())
+            .offset(rank-1)
+            .limit(1)
+            )
+        return session.exec(statement).first()
 
 def delete_rating(date: date):
     with Session(db.engine) as session:
