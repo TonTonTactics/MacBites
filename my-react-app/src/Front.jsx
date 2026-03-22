@@ -1,4 +1,5 @@
 import {Headnote, Footnote} from './Webpage.jsx'
+import {FetchRankings} from './fetch.jsx'
 
 export default function Front() {
 
@@ -17,6 +18,7 @@ export default function Front() {
 
 export function Featured() {
 
+
   return (
     <>
     <div>
@@ -34,9 +36,9 @@ export function Top() {
   return (
     <>
       <h2>Top</h2>
-      <p>Top Item 1</p>
-      <p>Top Item 2</p>
-      <p>Top Item 3</p>
+      <FetchRankings rank={1} />
+      <FetchRankings rank={2} />
+      <FetchRankings rank={3} />
     </>
   )
 }

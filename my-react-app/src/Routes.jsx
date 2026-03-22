@@ -20,3 +20,11 @@ export function GoSearch() {
     <div className="search-page" onClick={() => navigate('/search')}>Search</div>
   );
 }
+
+export function GoBite() {
+  const navigate = useNavigate();
+  return (
+    <div className="bite-page" onClick={() => navigate('/top/:id')}></div>
+  );
+}
+

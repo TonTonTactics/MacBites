@@ -10,14 +10,15 @@ from sqlalchemy import UniqueConstraint
 
 class Bites(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
-    name: str
-    description: str
-    image_url: str
-    price: float
-    calories: float
-    protein: float
-    fat: float
-    carbs: float
+    name: str | None = None
+    rating: int | None = Field(default=0)
+    description: str | None = None
+    image_url: str | None = None
+    price: float | None = None
+    calories: int | None = None
+    protein: float | None = None
+    fat: float | None = None
+    carbs: float | None = None
 
 
 class Ratings(SQLModel, table=True):
