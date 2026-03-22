@@ -1,5 +1,5 @@
 import {Headnote, Footnote} from './Webpage.jsx'
-import {FetchRankings} from './fetch.jsx'
+import {FetchRankings, FetchRecent} from './fetch.jsx'
 
 export default function Front() {
 
@@ -44,13 +44,12 @@ export function Top() {
 }
 
 export function Recent() {
-
   return (
     <>
       <h2>Recent</h2>
-      <p>Recent Item 1</p>
-      <p>Recent Item 2</p>
-      <p>Recent Item 3</p>
+      <FetchRecent index={0} />
+      <FetchRecent index={1} />
+      <FetchRecent index={2} />
     </>
   )
 }

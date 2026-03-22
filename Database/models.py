@@ -7,11 +7,14 @@ Antony Wiegand, McMaster, 2026"""
 from sqlmodel import Field, SQLModel
 from datetime import datetime
 from sqlalchemy import UniqueConstraint
+from datetime import date
 
 class Bites(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     name: str | None = None
     rating: int | None = Field(default=0)
+    date_added: date | None = None
+    views: int | None = None
     description: str | None = None
     image_url: str | None = None
     price: float | None = None

@@ -50,6 +50,11 @@ def get_bites(id: int):
 def get_ranked_bites(rank: int):
     return relations.select_ranked_bites(rank)
 
+@app.get("/recent-bites/{index}")
+def get_recent_bite(index: int):
+    return relations.select_recent_bites(index)
+    
+
 @app.delete("/ratings/")
 def delete_rating(date: date):
     return relations.delete_rating(date)

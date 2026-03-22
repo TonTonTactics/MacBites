@@ -83,6 +83,13 @@ def select_ranked_bites(rank: int):
             .limit(1)
             )
         return session.exec(statement).first()
+    
+def select_recent_bites(index: int):
+    with Session(db.engine) as session:
+        bites = session.exec(
+            select(models.Bites).order_by(models.Bites.date_added.desc())
+        ).all()
+        return bites[index]
 
 def delete_rating(date: date):
     with Session(db.engine) as session:
