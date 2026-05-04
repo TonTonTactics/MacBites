@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+:root {
+  --color-background: #ffffff;
+  --color-foreground: #1a1a1a;
+
+  --color-card: #ffffff;
+   --color-surface: #f4f4f4;
+
+  --color-primary: #7A003C; 
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #FFBE00;
+  --color-secondary-foreground: #7A003C;
+
+  --color-muted: #e2e8f0;
+  --color-muted-foreground: #64748b;
+
+  --color-border: #cbd5e1;
+
+  --color-surface: #f8f9fa;
+
+  --color-permred: #9b0000;
+  --color-permhero: #7A003C;
+}
+
+@theme {
+  --color-background: var(--background-hex);
+  --color-foreground: var(--foreground-hex);
+  --color-card: var(--card-hex);
+  --color-primary: var(--primary-hex);
+  --color-primary-foreground: var(--primary-fg-hex);
+  --color-secondary: var(--secondary-hex);
+  --color-secondary-foreground: var(--secondary-fg-hex);
+  --color-muted: var(--muted-hex);
+  --color-muted-foreground: var(--muted-fg-hex);
+  --color-border: var(--border-hex);
+  --color-surface: var(--surface-hex);
+  --color-permred: var(--permred-hex);
+  --color-permhero: var(--permhero-hex);
+}
+
+@layer base {
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: "Inter", sans-serif;
+  }
+
+  .font-serif {
+    font-family:"Playfair Display", serif;
+  }
+}
+
+@layer utilities {
+  @keyframes fade-in {
+    from {
+      opacity:0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity:1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slow-drift {
+    0%,
+    100% {
+      transform: translate(0,0);
+    }
+    25% {
+      transform: translate(20px,-30px);
+    }
+    50% {
+      transform: translate(-15px,-20px);
+    }
+    75% {
+      transform: translate(30px,10px);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes marquee {
+    0% {
+      transform:translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.4s ease-out both;
+  }
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+  .animate-marquee {
+    animation: marquee 30s linear infinite;
+  }
+  .fade-in {
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+  .fade-out {
+    animation: fadeOutUp 0.3s ease-in forwards;
+  }
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+  .animation-delay-800 {
+    animation-delay: 800ms;
+  }
+
+
+@keyframes animated-border {
+  0% {
+    stroke-dashoffset: 400;
+  }
+  100% {
+    stroke-dashoffset: -550;
+  }
+}
+
+.group:hover .animated-border-path {
+  animation: animated-border 1.5s linear infinite;
+}
+
+.animated-border:hover {
+  background-color: color-mix(in srgb, var(--color-primary) 15%, transparent);
+  backdrop-filter:blur(16px);
+  box-shadow: 0 0 20px color-mix(insrgb, var(--color-primary) 20%, transparent)
+}
+.timeline-glow {
+    box-shadow: 0 0 40px
+        color-mix(in srgb, var(--color-primary) 35%, transparent),
+      0 0 80px color-mix(in srgb, var(--color-primary) 25%, transparent);
+  }
+}
+
+@keyframes textShimmer {
+  /* 0%: The gold glint is hidden far to the left */
+  0% {
+    background-position: 100% center;
+  }
+  /* 15%: The glint zips all the way to the right */
+  15% {
+    background-position: 0% center;
+  }
+  /* 100%: It stays hidden on the right for the remainder of the 10s */
+  100% {
+    background-position: 0% center;
+  }
+}
+
+.animate-macbites-load {
+  /* Make the gradient strip very long */
+  background: linear-gradient(
+    to right,
+    #7A003C 0%,    /* Maroon (Hidden Area) */
+    #7A003C 40%,   /* Maroon */
+    #FFBE00 50%,   /* Gold Glint (The Blitz) */
+    #ffffff 51%,   /* Bright Spark */
+    #FFBE00 52%,   /* Gold Glint */
+    #7A003C 60%,   /* Maroon */
+    #7A003C 100%   /* Maroon (Hidden Area) */
+  );
+  
+  /* 300% gives us plenty of "hiding room" on either side */
+  background-size: 300% auto;
+  
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  animation: 
+    fadeIn 5s ease-out forwards, 
+    textShimmer 20s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+  
+  animation-delay: 0s, 5s;
+}
