@@ -22,3 +22,62 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Firebase cache and local runtime files
+.firebase/
+_firebase/
+firebase-debug.log
+*.firebase.report.json
+
+# Local environment variables / credentials
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Firebase hidden configuration file (if using specific local hosting configs)
+.firebaserc
+
+
+# 1. Dependencies & System Files
+node_modules/
+.pnp
+.pnp.js
+.DS_Store
+Thumbs.db
+
+# 2. Local Python Virtual Environment (Week 2 Scraper Workspace)
+.venv/
+venv/
+ENV/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# 3. Environment Variables & Secrets (CRITICAL FOR SECURITY)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+
+# 4. Production Build Outputs (Compiled Code)
+dist/
+build/
+out/
+
+# 5. Firebase Cache and Logs
+.firebase/
+_firebase/
+firebase-debug.log
+*.firebase.report.json
+
+# 6. IDE / Code Editor Settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
