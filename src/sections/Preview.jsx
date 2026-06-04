@@ -1,9 +1,10 @@
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
+import { FaHouse } from "react-icons/fa6";
 import { LuMail } from "react-icons/lu"; 
 
 const socialLinks = [
-  { icon: FaGithub, href: "https://github.com/TonTonTactics", label: "GitHub" },
-  { icon: FaLinkedin, href: "https://www.linkedin.com/in/antony-w-811653281/", label: "LinkedIn" },
+  { icon: FaGithub, href: "https://github.com/TonTonTactics/MacBites", label: "GitHub" },
+  { icon: FaHouse, href: "https://antonywiegand.com", label: "Portfolio" },
   { icon: LuMail, href: "mailto:antonywiegand2006@gmail.com?subject=Inquiry%20about%20MacBites", label: "Email" },
 ];
 
